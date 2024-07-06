@@ -20,5 +20,5 @@ se_vs_de_df_only_data = se_vs_de_df[[c for c in df.columns if (isinstance(c, dat
 
 se_vs_de_df_only_data.index = pd.DatetimeIndex(se_vs_de_df_only_data.index)
 se_vs_de_df_only_data.plot()
-
+se_vs_de_df_only_data.resample("Q").mean().plot()
 plt.show()
