@@ -1,6 +1,7 @@
 import pandas as pd
 import eurostat
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 df = eurostat.get_data_df("ei_bsco_m")
 
@@ -19,3 +20,5 @@ se_vs_de_df_only_data = se_vs_de_df[[c for c in df.columns if (isinstance(c, dat
 
 se_vs_de_df_only_data.index = pd.DatetimeIndex(se_vs_de_df_only_data.index)
 se_vs_de_df_only_data.plot()
+
+plt.show()
