@@ -2,6 +2,7 @@ import pandas as pd
 import eurostat
 from datetime import datetime
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 country_names = { "HU" : 'Hungary',
                   "EL" : "Greece",
@@ -79,15 +80,31 @@ de_cci_22or23_df_data_t.plot.bar(figsize=(16, 10))
 # barplot consom index 2023-01 of different countries
 cci_eu_df = df[(df["indic"] == "BS-CSMCI")
                & (df["s_adj"] == "NSA")]
-cci_eu_df = cci_eu_df[["country", datetime(2023, 1, 1)]]
-cci_eu_df = cci_eu_df[(df["country"] != "EU27_2020") & (df["country"] != "UK")].set_index("country")
+cci_eu_df_202301 = cci_eu_df[["country", datetime(2023, 1, 1)]]
+cci_eu_df_202301 = cci_eu_df_202301[(df["country"] != "EU27_2020") & (df["country"] != "UK")].set_index("country")
 
 # exchange country shortnames with realnames
-cci_eu_df.index = [country_names[i] for i in cci_eu_df.index]
+cci_eu_df_202301.index = [country_names[i] for i in cci_eu_df_202301.index]
 
 
 # visualize df with sorted horizontal bar plot
-cci_eu_df.sort_values( datetime(2023, 1, 1), ascending=[False]).plot.barh(figsize=(16, 10))
+cci_eu_df_202301.sort_values( datetime(2023, 1, 1), ascending=[False]).plot.barh(figsize=(16, 10))
 
-# plot graphs
+# plot histogram
+cci_eu_df_202301.plot.hist(bins=20)
+
+# we want consum data since 2010 for all countries
+columns_since_2010 = [c for c in df.columns if (isinstance(c, datetime) and (c.year >= 2010))]
+cci_eu_df_since_2010 = cci_eu_df[columns_since_2010 + ['country']].set_index("country")
+
+# exchange country shortnames with realnames
+cci_eu_df_since_2010.index = [country_names[i] for i in cci_eu_df_since_2010.index]
+cci_eu_df_since_2010_transposed = cci_eu_df_since_2010.transpose()
+label_order = cci_eu_df_since_2010_transposed.median().sort_values().index
+
+# boxplot with seaborn, unfortunately it needs a melt
+plt.figure(figsize=(8, 10))
+sns.boxplot(x="value", y="variable",  data=pd.melt(cci_eu_df_since_2010_transposed), order=label_order, palette="viridis")
+
+# plot all graphs
 plt.show()
