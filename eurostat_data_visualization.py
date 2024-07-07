@@ -3,6 +3,42 @@ import eurostat
 from datetime import datetime
 import matplotlib.pyplot as plt
 
+country_names = { "HU" : 'Hungary',
+                  "EL" : "Greece",
+                  "PT" : "Portugal",
+                  "SI" : "Slovenia",
+                  "LV": "Latvia",
+                  "EE": "Estonia",
+                  "SK": "Slovakia",
+                  "BG": "Bulgaria",
+                  "RO": "Romania",
+                  "MK": "North Macedonia",
+                  "AT": "Austria",
+                  "SE": "Sweden",
+                  "NL": "Netherlands",
+                  "ES": "Spain",
+                  "CZ": "Czechia",
+                  "HR": "Croatia",
+                  "TR": "Türkiye",
+                  "EU27_2020": "European Union",
+                  "EA20": "EuroArea",
+                  "FR": "France",
+                  "CY": "Cyprus",
+                  "IE": "Ireland",
+                  "DE": "Germany",
+                  "IT": "Italy",
+                  "AL": "Albania",
+                  "LU": "Luxembourg",
+                  "BE": "Belgium",
+                  "PL": "Poland",
+                  "DK": "Denmark",
+                  "FI": "Finnland",
+                  "MT" : "Malta",
+                  "RS" : "Servia",
+                  "ME" : "Montenegro",
+                  "LT" : "Lithuania",
+                  "UK" : "United Kingdom"
+}
 df = eurostat.get_data_df("ei_bsco_m")
 
 # Edit dataframe
@@ -45,9 +81,13 @@ cci_eu_df = df[(df["indic"] == "BS-CSMCI")
                & (df["s_adj"] == "NSA")]
 cci_eu_df = cci_eu_df[["country", datetime(2023, 1, 1)]]
 cci_eu_df = cci_eu_df[(df["country"] != "EU27_2020") & (df["country"] != "UK")].set_index("country")
+
+# exchange country shortnames with realnames
+cci_eu_df.index = [country_names[i] for i in cci_eu_df.index]
+
+
 # visualize df with sorted horizontal bar plot
 cci_eu_df.sort_values( datetime(2023, 1, 1), ascending=[False]).plot.barh(figsize=(16, 10))
-
 
 # plot graphs
 plt.show()
