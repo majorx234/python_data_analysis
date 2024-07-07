@@ -40,5 +40,14 @@ de_cci_22or23_df_data_t = de_cci_22or23_df_data.transpose()[::-1]
 de_cci_22or23_df_data_t.index = pd.DatetimeIndex(de_cci_22or23_df_data_t.index)
 de_cci_22or23_df_data_t.plot.bar(figsize=(16, 10))
 
+# barplot consom index 2023-01 of different countries
+cci_eu_df = df[(df["indic"] == "BS-CSMCI")
+               & (df["s_adj"] == "NSA")]
+cci_eu_df = cci_eu_df[["country", datetime(2023, 1, 1)]]
+cci_eu_df = cci_eu_df[(df["country"] != "EU27_2020") & (df["country"] != "UK")].set_index("country")
+# visualize df with sorted horizontal bar plot
+cci_eu_df.sort_values( datetime(2023, 1, 1), ascending=[False]).plot.barh(figsize=(16, 10))
+
+
 # plot graphs
 plt.show()
