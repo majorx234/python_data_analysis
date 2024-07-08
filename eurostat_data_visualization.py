@@ -126,8 +126,8 @@ for i1 in indicators:
 
 # create pandas dataframe:
 ihm = pd.DataFrame(corr, index=de20.columns, columns=de20.columns)
-plt.figure(figsize=(13,13))
-sns.heatmap(ihm, cmap="viridis", vmin=-1, vmax=1)
+plt.figure(figsize=(12,12))
+sns.heatmap(ihm, cmap="RdBu", vmin=-1, vmax=1)
 
 # plot all graphs
 plt.show()
