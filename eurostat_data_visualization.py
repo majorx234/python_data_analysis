@@ -107,6 +107,9 @@ label_order = cci_eu_df_since_2010_transposed.median().sort_values().index
 plt.figure(figsize=(8, 10))
 sns.boxplot(x="value", y="variable",  data=pd.melt(cci_eu_df_since_2010_transposed), order=label_order, palette="viridis")
 
+# violineplot with density information (slidely changed order)
+sns.violinplot(x="value", y="variable", data=pd.melt( cci_eu_df_since_2010_transposed[["Greece", "Germany", "Sweden", "Denmark"]]), order=["Greece", "Germany", "Denmark", "Sweden"], palette="viridis")
+
 # Part 2
 # get table of indices:
 # 'BS-CSMCI', 'BS-FS-LY', 'BS-FS-NY', 'BS-GES-LY', 'BS-GES-NY', 'BS-MP-NY', 'BS-MP-PR', 'BS-PT-LY', 'BS-PT-NY', 'BS-SFSH', 'BS-SV-NY', 'BS-SV-PR', 'BS-UE-NY'
