@@ -3,6 +3,7 @@ import eurostat
 from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy.stats as stats
 
 country_names = { "HU" : 'Hungary',
                   "EL" : "Greece",
@@ -105,6 +106,28 @@ label_order = cci_eu_df_since_2010_transposed.median().sort_values().index
 # boxplot with seaborn, unfortunately it needs a melt
 plt.figure(figsize=(8, 10))
 sns.boxplot(x="value", y="variable",  data=pd.melt(cci_eu_df_since_2010_transposed), order=label_order, palette="viridis")
+
+# Part 2
+# get table of indices:
+# 'BS-CSMCI', 'BS-FS-LY', 'BS-FS-NY', 'BS-GES-LY', 'BS-GES-NY', 'BS-MP-NY', 'BS-MP-PR', 'BS-PT-LY', 'BS-PT-NY', 'BS-SFSH', 'BS-SV-NY', 'BS-SV-PR', 'BS-UE-NY'
+y20 = [c for c in df.columns if (isinstance(c, datetime) and (c.year >= 2000) and (c.year < 2020))]
+de20 = df[(df["s_adj"] == "NSA") & (df["country"] == "DE")].set_index("indic")[y20].transpose()
+de20.index = pd.DatetimeIndex(de20.index)
+
+# calculate Pearson Correlationindex
+corr = []
+indicators = de20.columns
+for i1 in indicators:
+    res = []
+    for i2 in indicators:
+        r, p = stats.pearsonr(de20[i1].values, de20[i2].values)
+        res.append(r)
+    corr.append(res)
+
+# create pandas dataframe:
+ihm = pd.DataFrame(corr, index=de20.columns, columns=de20.columns)
+plt.figure(figsize=(13,13))
+sns.heatmap(ihm, cmap="viridis", vmin=-1, vmax=1)
 
 # plot all graphs
 plt.show()
