@@ -17,6 +17,10 @@
   - script: `us_wage_income_envelope.py`
 - 3. work with time series data (prediction and analysis)
   - linea regression:
+    - script: time_series_prediction.py
     - show two examples
       - 1st with sklearn.linear_model.LinearRegression
       - 2nd with scipy.stats.linregress
+  - temperature data of cities:
+    - data: https://huggingface.co/spaces/Epitech/IOT_temperature/resolve/main/city_temperature.csv?download=true
+    - script: time_series_prediction_temperature.py
