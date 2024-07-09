@@ -1,4 +1,4 @@
-# Info 
+# Info
 - learning data science with python, pandas...
 ## Project1: data visualization
 - `pip install scikit-learn statsmodels eurostat notebook matplotlib seaborn pandas`
@@ -15,3 +15,8 @@
   - https://github.com/caichinger/glt2019_ml_intro
   - create a scatter plot with further subplots to draw mean values as a curve
   - script: `us_wage_income_envelope.py`
+- 3. work with time series data (prediction and analysis)
+  - linea regression:
+    - show two examples
+      - 1st with sklearn.linear_model.LinearRegression
+      - 2nd with scipy.stats.linregress
