@@ -107,7 +107,9 @@ label_order = cci_eu_df_since_2010_transposed.median().sort_values().index
 plt.figure(figsize=(8, 10))
 sns.boxplot(x="value", y="variable",  data=pd.melt(cci_eu_df_since_2010_transposed), order=label_order, palette="viridis")
 
+
 # violineplot with density information (slidely changed order)
+plt.figure()
 sns.violinplot(x="value", y="variable", data=pd.melt( cci_eu_df_since_2010_transposed[["Greece", "Germany", "Sweden", "Denmark"]]), order=["Greece", "Germany", "Denmark", "Sweden"], palette="viridis")
 
 # Part 2
@@ -131,6 +133,29 @@ for i1 in indicators:
 ihm = pd.DataFrame(corr, index=de20.columns, columns=de20.columns)
 plt.figure(figsize=(12,12))
 sns.heatmap(ihm, cmap="RdBu", vmin=-1, vmax=1)
+
+# check corelation of BS-SFSH and "BS-CSMCI
+# just as scatter plot
+de20.plot.scatter(x="BS-SFSH", y="BS-CSMCI")
+
+# as joint plot
+# here with regression line and histogram of both indices
+# temporal context ca be done via dimensionality of color
+joint_plot_de20 = sns.jointplot(x=de20["BS-SFSH"], y=de20["BS-CSMCI"], scatter=False, kind="reg")
+joint_plot_de20.ax_joint.text(x= 5.0, y=-25.0, s="pearsonr=%0.2f p=%e" %stats.pearsonr(de20["BS-SFSH"],de20["BS-CSMCI"]))
+
+# take only first month
+de20_1st = de20[de20.index.month==1].copy()
+# take only even years
+de20_1st_even = de20_1st[::2]
+# remove M01 from index
+de20_1st_even.index = de20_1st_even.index.map(str).str.replace("-01-01 00:00:00", "")
+years_index_float = [float(c) for c in de20_1st_even.index]
+sns.scatterplot(data=de20_1st_even, x="BS-SFSH", y="BS-CSMCI",
+                hue=years_index_float, legend=True)
+# detail plot without Legend
+sns.scatterplot(data=de20, x="BS-SFSH", y="BS-CSMCI",
+                hue=de20.index, legend=False)
 
 # plot all graphs
 plt.show()
