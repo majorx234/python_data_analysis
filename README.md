@@ -24,3 +24,4 @@
   - temperature data of cities:
     - data: https://huggingface.co/spaces/Epitech/IOT_temperature/resolve/main/city_temperature.csv?download=true
     - script: time_series_prediction_temperature.py
+
