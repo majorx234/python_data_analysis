@@ -21,6 +21,9 @@ wage_data.groupby('age')['wage'].median().plot(ax=ax1, color="pink")
 
 edu_grad = wage_data.education.unique()
 edu_grad.sort()
+
+mean_wages_per_edu_grad = wage_data.groupby('education')['wage'].agg('mean')
+
 edu_grad_col_dict = {'1. < HS Grad': "red",
                      '2. HS Grad': "orange",
                      '3. Some College': "yellow",
