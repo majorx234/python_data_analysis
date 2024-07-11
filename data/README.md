@@ -1,2 +1,3 @@
 - wage.csv.gz: https://cran.r-project.org/web/packages/ISLR/index.html
 - no2.csv.gz: http://www.eea.europa.eu/data-and-maps/data/airbase-the-european-air-quality-database-8 (and reformatted)
+- boston_house_prices.csv: https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/datasets/data/boston_house_prices.csv
