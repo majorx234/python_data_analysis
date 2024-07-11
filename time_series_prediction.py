@@ -5,40 +5,43 @@ from sklearn.linear_model import LinearRegression
 import scipy.stats
 
 
+
+def lin_func_with_noise(x, m=4, b=20, e=0):
+    return m * x + b + e
+
+
 # create linear data (20 values) with noise
 data_x1 = [x for x in range(100)]
-data_y2 = []
+data_y1 = []
 for i in data_x1:
-    data_y2.append(i + 2* (rnd.random()-0.5))
+    data_y1.append(i + 4 * (rnd.random() - 0.5))
 
 data_x1 = np.array(data_x1).reshape((-1, 1))
-data_y2 = np.array(data_y2)
+data_y1 = np.array(data_y1)
 
 # create linear regression model with help of sklearn library
-model = LinearRegression().fit(data_x1, data_y2)
-r_sq = model.score(data_x1, data_y2)
+model = LinearRegression().fit(data_x1, data_y1)
+r_sq = model.score(data_x1, data_y1)
 
 m1 = model.coef_
 b1 = model.intercept_
 
 print(f'y = {m1}x + {b1}')
+data_y1_estimate = lin_func_with_noise(data_x1, m1, b1, 0)
 
 # plot values
-plt.scatter(data_x1, data_y2, c="blue")
+plt.scatter(data_x1, data_y1, c="blue")
+plt.scatter(data_x1, data_y1_estimate, c="tomato")
 
 # plot regression line
 plt.plot([0, 99], [m1*0+b1, m1*99+b1], marker='o', color='red')
-
+plt.vlines(data_x1, data_y1, data_y1_estimate,
+           linestyle="--", color="black", linewidth=1, zorder=0, alpha=0.3)
 # 2nd way to create values with noise
 ndat = 100
 # make use of numpy pseudo random numer generator with different seeds
 rng = np.random.default_rng(42)
 rng2 = np.random.default_rng(43)
-
-
-def lin_func_with_noise(x, m=4, b=20, e=0):
-    return m * x + b + e
-
 
 # create numpy arrays
 # some x values between 0 and 50
