@@ -1,9 +1,11 @@
+absl-py==2.1.0
 anyio==4.4.0
 argon2-cffi==23.1.0
 argon2-cffi-bindings==21.2.0
 arrow==1.3.0
 arviz==0.18.0
 asttokens==2.4.1
+astunparse==1.6.3
 async-lru==2.0.4
 attrs==23.2.0
 Babel==2.15.0
@@ -27,9 +29,13 @@ eurostat==1.1.1
 executing==2.0.1
 fastjsonschema==2.20.0
 filelock==3.15.4
+flatbuffers==24.3.25
 fonttools==4.53.1
 fqdn==1.5.1
+gast==0.6.0
 geopandas==1.0.1
+google-pasta==0.2.0
+grpcio==1.65.0
 h11==0.14.0
 h5netcdf==1.3.0
 h5py==3.11.0
@@ -55,8 +61,11 @@ jupyter_server_terminals==0.5.3
 jupyterlab==4.2.3
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.2
+keras==3.4.1
 kiwisolver==1.4.5
+libclang==18.1.1
 logical-unification==0.4.6
+Markdown==3.6
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 matplotlib==3.9.1
@@ -64,7 +73,9 @@ matplotlib-inline==0.1.7
 mdurl==0.1.2
 miniKanren==1.0.3
 mistune==3.0.2
+ml-dtypes==0.3.2
 multipledispatch==1.0.0
+namex==0.0.8
 nbclient==0.10.0
 nbconvert==7.16.4
 nbformat==5.10.4
@@ -72,6 +83,8 @@ nest-asyncio==1.6.0
 notebook==7.2.1
 notebook_shim==0.2.4
 numpy==1.26.4
+opt-einsum==3.3.0
+optree==0.12.1
 overrides==7.7.0
 packaging==24.1
 pandas==2.2.2
@@ -83,6 +96,7 @@ pillow==10.4.0
 platformdirs==4.2.2
 prometheus_client==0.20.0
 prompt_toolkit==3.0.47
+protobuf==4.25.3
 psutil==6.0.0
 ptyprocess==0.7.0
 pure-eval==0.2.2
@@ -114,6 +128,10 @@ sniffio==1.3.1
 soupsieve==2.5
 stack-data==0.6.3
 statsmodels==0.14.2
+tensorboard==2.16.2
+tensorboard-data-server==0.7.2
+tensorflow-io-gcs-filesystem==0.37.1
+termcolor==2.4.0
 terminado==0.18.1
 threadpoolctl==3.5.0
 tinycss2==1.3.0
@@ -129,5 +147,7 @@ wcwidth==0.2.13
 webcolors==24.6.0
 webencodings==0.5.1
 websocket-client==1.8.0
+Werkzeug==3.0.3
+wrapt==1.16.0
 xarray==2024.6.0
 xarray-einstats==0.7.0
