@@ -1,3 +1,5 @@
 - wage.csv.gz: https://cran.r-project.org/web/packages/ISLR/index.html
 - no2.csv.gz: http://www.eea.europa.eu/data-and-maps/data/airbase-the-european-air-quality-database-8 (and reformatted)
 - boston_house_prices.csv: https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/datasets/data/boston_house_prices.csv
+- Meteorite_Landings_20240714.csv: https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data
+  - Nasa Data collected by The Meteoritical Society contains information of the known meteorite landings 
