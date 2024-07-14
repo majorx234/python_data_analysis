@@ -3,8 +3,15 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 from statsmodels.tsa.api import ExponentialSmoothing
 from sklearn.preprocessing import MinMaxScaler
+from os.path import exists
 
-df = pd.read_csv("city_temperature.csv", dtype={'State': object})
+city_temperature_file_exists = exists("data/city_temperature.csv")
+
+if not city_temperature_file_exists:
+    print("need to download temperature data: https://huggingface.co/spaces/Epitech/IOT_temperature/blob/main/city_temperature.csv")
+    exit()
+
+df = pd.read_csv("data/city_temperature.csv", dtype={'State': object})
 
 # take average temperatur of Frankfurt
 df = df[df["City"] == "Munich"][['Year', 'Month', 'Day', 'AvgTemperature']]

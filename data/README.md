@@ -5,3 +5,4 @@
   - Nasa Data collected by The Meteoritical Society contains information of the known meteorite landings 
 - ne_10m_admin_0_countries.shp: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/
   - Earth geo spatial data woth information of countries
+- city_temperature.csv https://huggingface.co/spaces/Epitech/IOT_temperature/blob/main/city_temperature.csv
