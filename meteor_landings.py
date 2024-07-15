@@ -5,7 +5,7 @@ from datetime import datetime
 from ast import literal_eval as make_tuple
 
 df = pd.read_csv("data/Meteorite_Landings_20240714.csv")
-gdf = gpd.read_file('data/ne_10m_admin_0_countries.shp')
+gdf = gpd.read_file('data/ne_10m_admin_0_countries.zip')
 
 bl_geo = gpd.read_file("data/europe.geo.json")
 bl_geo.loc[bl_geo["iso_a2"] == "GB", "iso_a2"] = "UK"
@@ -32,6 +32,8 @@ fig, ax = plt.subplots(figsize=(14, 7))
 gdf.plot(ax=ax)
 gdf_meteors.plot(ax=ax, alpha=0.7, color="red")
 
+# lets find all amount of meteors fallen on Countries in the european union
+
+
 plt.show()
 
-# lets find all amount of metears fallen on Countries in the european union
