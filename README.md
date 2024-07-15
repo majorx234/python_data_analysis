@@ -17,11 +17,22 @@
   - script: `us_wage_income_envelope.py`
 - 3. work with time series data (prediction and analysis)
   - linea regression:
-    - script: time_series_prediction.py
+    - script: `time_series_prediction.py`
     - show two examples
       - 1st with sklearn.linear_model.LinearRegression
       - 2nd with scipy.stats.linregress
   - temperature data of cities:
     - data: https://huggingface.co/spaces/Epitech/IOT_temperature/resolve/main/city_temperature.csv?download=true
     - script: time_series_prediction_temperature.py
-
+- 4. bayesian linear regression
+  - scrip `bayesian_linear_regression.py`
+  - linear regression using bayesian therorems
+  - to gain information about uncertainty
+  - uses PyMC: https://www.pymc.io
+  - https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7
+  - https://medium.com/@vanillaxiangshuyang/bayesian-linear-regression-with-tensorflow-probability-5a967b133367
+- 5. ideas from tutrial by Stefanie Molin
+  - https://github.com/stefmolin/pandas-workshop
+  - script: `meteor_landings.py`
+  - use data with GPS information and a world map
+  - use GeoPands to integrade information
