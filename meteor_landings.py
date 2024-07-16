@@ -39,7 +39,7 @@ countries = gdf[(gdf.ISO_A2 != "-99")].ISO_A2.unique()
 
 gdf_meteors = gdf_meteors[~ (gdf_meteors["Longitude"].isnull() | (gdf_meteors["Latitude"].isnull())) ]
 meteors_per_country = pd.DataFrame(0, index=countries, columns=range(2))
-meteors_per_country.columns = ["amount", "sum mass"]
+meteors_per_country.columns = ["amount", "sum_mass"]
 
 for country in countries:
     print("next country: {}".format(country))
@@ -54,9 +54,32 @@ for country in countries:
 
 print(meteors_per_country)
 meteors_per_country.to_csv("data/meteors_per_country.csv")
+
+
+def amount_to_color(amount):
+    if isinstance(amount, float):
+        if amount.isnull():
+            return '#ffFFff'
+    elif (amount <= 10):
+        return '#00FF00'
+    elif (amount < 20):
+        return '#FFFF00'
+    elif (amount < 50):
+        return '#FFA500'
+    elif (amount < 100):
+        return '#FF0000'
+    else:
+        return '#A020F0'
+
+
+meteors_per_country["color"] = [amount_to_color(x) for x in meteors_per_country.amount]
 gdf_with_mass_amount = pd.merge(gdf, meteors_per_country, how="left",
                                 left_on='ISO_A2', right_index=True)
+gdf_with_mass_amount["color"] = gdf_with_mass_amount["color"].fillna("#B0B0B0")
 print(gdf_with_mass_amount)
-meteors_per_country.to_csv("data/gdf_with_mass_amount.csv")
+
+gdf_with_mass_amount.plot(color=gdf_with_mass_amount["color"])
+
+gdf_with_mass_amount.to_csv("data/gdf_with_mass_amount.csv")
 
 plt.show()
