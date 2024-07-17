@@ -71,8 +71,24 @@ def amount_to_color(amount):
     else:
         return '#A020F0'
 
+def values_to_color_with_thresholds(amount,thresholds):
+    if isinstance(amount, float):
+        if math.isnan(amount):
+            return '#ffFFff'
+    elif (amount <= thresholds[0]):
+        return '#00FF00'
+    elif (amount < thresholds[1]):
+        return '#FFFF00'
+    elif (amount < thresholds[2]):
+        return '#FFA500'
+    elif (amount < thresholds[3]):
+        return '#FF0000'
+    else:
+        return '#A020F0'
+
 
 meteors_per_country["color"] = [amount_to_color(x) for x in meteors_per_country.amount]
+meteors_per_country["color_mass"] = [values_to_color_with_thresholds(x, mass_steps.to_numpy()) for x in meteors_per_country.sum_mass]
 gdf_with_mass_amount = pd.merge(gdf, meteors_per_country, how="left",
                                 left_on='ISO_A2', right_index=True)
 gdf_with_mass_amount["color"] = gdf_with_mass_amount["color"].fillna("#B0B0B0")
