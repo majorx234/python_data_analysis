@@ -59,8 +59,11 @@ meteors_per_country.to_csv("data/meteors_per_country.csv")
 def amount_to_color(amount):
     if isinstance(amount, float):
         if amount.isnull():
-            return '#ffFFff'
-    elif (amount <= 10):
+            return '#B0B0B0'
+    else:
+        if not isinstance(amount, int):
+            return '#B0B0B0'
+    if (amount <= 10):
         return '#00FF00'
     elif (amount < 20):
         return '#FFFF00'
@@ -71,31 +74,51 @@ def amount_to_color(amount):
     else:
         return '#A020F0'
 
-def values_to_color_with_thresholds(amount,thresholds):
-    if isinstance(amount, float):
-        if math.isnan(amount):
-            return '#ffFFff'
-    elif (amount <= thresholds[0]):
+
+def value_to_color_with_thresholds(value, thresholds):
+    if isinstance(value, float):
+        if math.isnan(value):
+            return '#B0B0B0'
+    else:
+        return '#B0B0B0'
+    if (value <= thresholds[0]):
         return '#00FF00'
-    elif (amount < thresholds[1]):
+    elif (value < thresholds[1]):
         return '#FFFF00'
-    elif (amount < thresholds[2]):
+    elif (value < thresholds[2]):
         return '#FFA500'
-    elif (amount < thresholds[3]):
+    elif (value < thresholds[3]):
         return '#FF0000'
     else:
         return '#A020F0'
 
 
 meteors_per_country["color"] = [amount_to_color(x) for x in meteors_per_country.amount]
-meteors_per_country["color_mass"] = [values_to_color_with_thresholds(x, mass_steps.to_numpy()) for x in meteors_per_country.sum_mass]
+
+gdf_with_mass_amount_percentiles = meteors_per_country.sum_mass.quantile([0.0,
+                                                                          0.005,
+                                                                          0.05,
+                                                                          0.25,
+                                                                          0.50,
+                                                                          0.75,
+                                                                          0.95,
+                                                                          0.995,
+                                                                          1.0])
+
+mass_steps = gdf_with_mass_amount_percentiles[(gdf_with_mass_amount_percentiles > 0.1)]
+
+meteors_per_country["color_mass"] = [value_to_color_with_thresholds(x, mass_steps.to_numpy()) for x in meteors_per_country.sum_mass.to_numpy()]
 gdf_with_mass_amount = pd.merge(gdf, meteors_per_country, how="left",
                                 left_on='ISO_A2', right_index=True)
 gdf_with_mass_amount["color"] = gdf_with_mass_amount["color"].fillna("#B0B0B0")
+gdf_with_mass_amount["color_mass"] = gdf_with_mass_amount["color_mass"].fillna("#B0B0B0")
+
 print(gdf_with_mass_amount)
 
 gdf_with_mass_amount.plot(color=gdf_with_mass_amount["color"])
 
 gdf_with_mass_amount.to_csv("data/gdf_with_mass_amount.csv")
+
+gdf_with_mass_amount.plot(color=gdf_with_mass_amount["color_mass"])
 
 plt.show()
