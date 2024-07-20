@@ -36,3 +36,12 @@
   - script: `meteor_landings.py`
   - use data with GPS information and a world map
   - use GeoPands to integrade information
+    - 1. Take world map and draw impacts of meteorids:
+      - idea from https://geopandas.org/en/latest/gallery/create_geopandas_from_pandas.html
+    - 2. count impacts for each country (is point in georegion)
+      - idea from here:
+        - https://stackoverflow.com/questions/63884865/how-can-i-get-country-name-by-coordinates-without-external-api
+        - https://automating-gis-processes.github.io/CSC18/lessons/L4/point-in-polygon.html
+      - doesn't work that well
+      - need better check if point is in a region:
+        - https://gis.stackexchange.com/questions/437956/best-way-to-check-if-a-point-is-in-a-region
