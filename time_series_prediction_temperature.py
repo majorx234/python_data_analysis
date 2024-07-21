@@ -63,7 +63,7 @@ dw.plot()
 
 
 # exponential smoothing
-# Holt-Winters 3rd exponential smothening
+# Holt-Winters 3rd exponential smoothening
 dh = dg.copy()
 sc = MinMaxScaler(feature_range=(0.00001, 1))
 dh['scal'] = sc.fit_transform(dh)

@@ -23,7 +23,9 @@
       - 2nd with scipy.stats.linregress
   - temperature data of cities:
     - data: https://huggingface.co/spaces/Epitech/IOT_temperature/resolve/main/city_temperature.csv?download=true
-    - script: time_series_prediction_temperature.py
+    - script: `time_series_prediction_temperature.py`
+    - use normal smoothening
+    - use Holt-Winters 3rd exponential smoothening on data to forecast
 - 4. bayesian linear regression
   - scrip `bayesian_linear_regression.py`
   - linear regression using bayesian therorems
